@@ -1,0 +1,261 @@
+/* ============================================
+   IK Groups — Design System & Phase 0 Styles
+   ============================================
+   Architecture note:
+   CSS custom properties (design tokens) are defined
+   here so Phase 1+ can override them without
+   rewriting component styles.
+   ============================================ */
+
+/* --- Design Tokens --- */
+:root {
+  /* Palette */
+  --color-bg:             #0b0b0f;
+  --color-bg-glow:        #111119;
+  --color-surface:        #16161e;
+  --color-text:           #ffffff;
+  --color-text-secondary: #9696a8;
+  --color-text-muted:     #5a5a6c;
+  --color-border:         rgba(255, 255, 255, 0.12);
+  --color-border-hover:   rgba(255, 255, 255, 0.9);
+
+  /* Typography — system font stack for instant rendering */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Fluid type scale */
+  --text-brand:   clamp(2.25rem, 5.5vw, 4rem);
+  --text-tagline: clamp(1.05rem, 2.2vw, 1.4rem);
+  --text-body:    clamp(0.875rem, 1.4vw, 1rem);
+  --text-small:   0.8125rem;
+
+  /* Spacing */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 2.5rem;
+  --sp-xl: 3.5rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.3s;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Hero --- */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-lg);
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    var(--color-bg-glow) 0%,
+    var(--color-bg) 68%
+  );
+}
+
+.hero__content {
+  text-align: center;
+  max-width: 580px;
+  width: 100%;
+  animation: hero-enter 0.9s var(--ease-out) both;
+}
+
+.hero__brand {
+  font-size: var(--text-brand);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--sp-lg);
+}
+
+.hero__divider {
+  width: 56px;
+  height: 1px;
+  background: var(--color-border);
+  margin: 0 auto var(--sp-lg);
+}
+
+.hero__tagline {
+  font-size: var(--text-tagline);
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: var(--sp-md);
+  letter-spacing: 0.01em;
+}
+
+.hero__description {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: 1.85;
+  margin-bottom: var(--sp-xl);
+}
+
+.hero__cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Button --- */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 2.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    color var(--duration) var(--ease-out),
+    background-color var(--duration) var(--ease-out),
+    border-color var(--duration) var(--ease-out);
+}
+
+.btn--outline {
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+/* --- Footer --- */
+.footer {
+  padding: var(--sp-md) var(--sp-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer__copyright,
+.footer__domain,
+.footer__legal {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-xs);
+}
+
+.footer__legal:last-child {
+  margin-bottom: 0;
+}
+
+.footer__domain a,
+.footer__legal a {
+  transition: color 0.2s ease;
+}
+
+.footer__domain a:hover,
+.footer__legal a:hover {
+  color: var(--color-text-secondary);
+}
+
+.footer__domain a:focus-visible,
+.footer__legal a:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: 2px;
+}
+
+.footer__sep {
+  margin: 0 0.5rem;
+  opacity: 0.5;
+}
+
+/* --- Keyframes --- */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .hero {
+    padding: var(--sp-md) var(--sp-sm);
+  }
+
+  .hero__brand {
+    letter-spacing: 0.12em;
+  }
+
+  .hero__description br {
+    display: none;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
