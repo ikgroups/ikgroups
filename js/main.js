@@ -22,8 +22,8 @@
   // ─── Contact Configuration ───────────────────────────
   // Update these when contact details are available.
   var CONTACT = {
-    type: '',   // 'mailto' | 'tel' | 'whatsapp' | 'url'
-    value: ''   // email, phone number, or URL
+    type: 'mailto',
+    value: 'ikgroups926@gmail.com'
   };
   // ─────────────────────────────────────────────────────
 
